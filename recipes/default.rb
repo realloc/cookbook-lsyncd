@@ -39,6 +39,16 @@ else
   end
 end
 
+node['lsyncd']['targets'].each do |target|
+  next if target['name'].nil?
+  lsyncd_target target['name'] do
+    target.each_key do |attr|
+      send(attr, target[attr]) if target[attr]
+    end
+    notifies :restart, 'service[lsyncd]', :delayed
+  end
+end
+
 service 'lsyncd' do
   action [:enable, :start]
   ignore_failure true
