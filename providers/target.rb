@@ -52,6 +52,7 @@ action :create do
       :mode => new_resource.mode,
       :source => new_resource.source,
       :target => new_resource.target,
+      :delete => new_resource.delete,
       :user => new_resource.user,
       :host => new_resource.host,
       :rsync_opts => rsync_opts,
