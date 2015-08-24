@@ -14,11 +14,11 @@ sync {
 <% end -%>
     delete      = "<%= @delete %>",
 <% if @rsync || @rsync_opts -%>
-rsync = {
+    rsync = {
 <% @rsync.each do |k,v| -%>
-   <%= k %> = "<%= v %>",
+        <%= k %> = "<%= v %>",
 <% end -%>
-<%= "    _extra = #{@rsync_opts}" if @rsync_opts -%>
+<%= "        _extra = #{@rsync_opts}" if @rsync_opts -%>
 }
 <% end -%>
 <%= "    exclude     = #{@exclude},\n" if @exclude -%>

@@ -12,7 +12,16 @@ sync {
     targetdir   = "<%= @target %>",
     host        = "<%= @host %>",
 <% end -%>
-<%= "    rsync = {\n      _extra = #{@rsync_opts},\n    },\n" if @rsync_opts -%>
+    delete      = "<%= @delete %>",
+<% if @rsync || @rsync_opts -%>
+    rsync = {
+<% @rsync.each do |k,v| -%>
+        <%= k %> = "<%= v %>",
+<% end -%>
+<%= "        _extra = #{@rsync_opts}" if @rsync_opts -%>
+}
+<% end -%>
 <%= "    exclude     = #{@exclude},\n" if @exclude -%>
 <%= "    excludeFrom = \"#{@exclude_from}\",\n" if @exclude_from -%>
 }
+
